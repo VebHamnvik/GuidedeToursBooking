@@ -1,0 +1,85 @@
+@startuml
+'Documentation: https://plantuml.com/use-case-diagram
+'NB: english only
+'NB: lower-case only for aliases
+'-Jørgen
+
+' ;;;; Actors ;;;;
+left to right direction
+'top to bottom direction
+:Administrator: as admin
+:User: as user
+
+' ;;;; Usecases ;;;;
+'___for user___
+(Create Account) as (create_user)
+(Create Advertisement) as (create_ad)
+(Edit Advertisement) as (edit_ad)
+(Receive Reservations)
+(Reserve a Trip)
+(Accept Reservation)
+(Deny Reservation)
+(Browse Advertisements) as (browse)
+(Restrict Results)
+(Check Availability) as (available)
+(Cancel Trip)
+(Postpone Trip)
+(Make Payment)
+(Add to Favorites) as (favorite)
+(See Favorites)
+(Edit Favorites)
+(Pay or Receive Payment) as (pay)
+(Review User) as (review)
+'___for admin___
+(Ban Users) as (ban)
+(Edit All User Advertisements) as (admin_edit)
+(See Reports)
+(Do everything a User can do)
+
+
+' ;;;; Relationships ;;;;
+' ____how to use____
+' -> means arrow goes to downwards
+' --> means arrow goes sideways (to the right)
+'(case1) -> (case2) means you can do case2 after youve done case1
+
+'___user relationships___
+user --> (create_user)
+user --> (create_ad)
+user --> (Reserve a Trip)
+user --> (Receive Reservations)
+user --> (browse)
+user --> (See Favorites)
+user --> (pay)
+
+(create_user) --> (Add info about self)
+(create_user) --> (Add payment details)
+
+(create_ad) --> (edit_ad)
+
+(Receive Reservations) --> (Accept Reservation)
+(Receive Reservations) --> (Deny Reservation)
+(Receive Reservations) --> (Talk to other User)
+
+(Reserve a Trip) --> (Talk to other User)
+(Reserve a Trip) --> (Cancel Trip)
+(Reserve a Trip) --> (Postpone Trip)
+(Reserve a Trip) --> (Make Payment)
+
+(browse) --> (Reserve a Trip)
+(browse) --> (Restrict Results)
+(browse) --> (available)
+(browse) --> (favorite)
+
+(See Favorites) --> (Edit Favorites)
+
+(pay) --> (review)
+
+'___admin relationships___
+admin --> (See Reports)
+admin --> (Do everything a User can do)
+
+(See Reports) --> (ban)
+(See Reports) --> (admin_edit)
+
+@enduml

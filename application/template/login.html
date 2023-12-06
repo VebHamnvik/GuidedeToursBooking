@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<form method="post">
+    <h1>{% block title %} Logg inn {% endblock %}</h1>
+    <label for="username">Brukernavn</label>
+    <input type="text" name="username" id="username"
+           placeholder="Brukernavn"
+           value="{{ request.form['username'] }}">
+    <label for="password">Passord</label>
+    <input type="password" name="password" id="password"
+           placeholder="Passord"
+           value="{{ request.form['password'] }}">
+    <button type="submit">Logg inn</button>
+    <a href="{{url_for('user.registrer_user')}}">Registrer her</a>
+    {% for mesg in get_flashed_messages() %}
+    <h4>{{ mesg }}</h4>
+</form>
+{% endfor %}
+<h2 id="add-distance">Eksempelbrukere</h2>
+<table>
+    <thead>
+        <th>Brukernavn</th>
+        <th>Passord</th>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Guide1</td>
+        <td>Guide1</td>
+    </tr>
+    <tr>
+        <td>Guide2</td>
+        <td>Guide2</td>
+    </tr>
+    <tr>
+        <td>Guide3</td>
+        <td>Guide3</td>
+    </tr>
+    <tr>
+        <td>Bruker4</td>
+        <td>Bruker4</td>
+    </tr>
+    <tr>
+        <td>Bruker5</td>
+        <td>Bruker5</td>
+    </tr>
+    </tbody>
+</table>
+
+{% endblock %}

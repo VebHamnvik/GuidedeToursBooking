@@ -1,0 +1,54 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+<h1>Dine bookinger</h1>
+<p>Her er en liste over dine bookinger:</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Tittel</th>
+        <th class="table-description">Beskrivelse</th>
+        <th>Dato</th>
+        <th>Pris</th>
+        <th>Guide ID</th>
+        <th>Max deltagere</th>
+        <th>Ledige plasser</th>
+        <th>Du har bestillt for så mange</th>
+        <th>Endre bestilling?</th>
+        <th>Slette bestilling?</th>
+    </tr>
+    </thead>
+
+
+    <tbody>
+    {% for booking in correct_bookings %}
+    <tr>
+        <td>
+            <a href="/loggedtour/{{ booking.id_tour }}">{{ booking.tour_title }}</a>
+        </td>
+        <td class="table-description">{{ booking.description }}</td>
+        <td>{{ booking.date }}</td>
+        <td>{{ booking.price }}</td>
+        <td>{{ booking.created_by }}</td>
+        <td>{{ booking.max_capacity }}</td>
+        <td>{{ booking.spots_available }}</td>
+        <td>{{ booking.participants }}</td>
+        <!-- Slett denne? -->
+        <td>
+            <button type="submit" class="button">Endre Booking</button>
+        </td>
+
+        <td>
+            <form method="POST" action="/cancel_booking">
+                <input type="hidden" name="id_tour" value="{{ booking.id_tour }}">
+                <input type="hidden" name="id_user" value="{{ current_user.id }}">
+                <button type="submit" class="button" name="cancel_booking">Kansellér Booking</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+<h1> Lag en annonse! </h1>
+<form method="post" enctype="multipart/form-data"> <!-- for å kunne laste opp image, fikk dette fra chatgpt-->
+    <label for="title">Tittel på guidet tur</label>
+    <input type="text" name="title" id="title"
+           placeholder="Tittel"
+           value="{{ request.form['title'] }}">
+    <label for="max_capacity">Kapasitet</label>
+    <input type="text" name="max_capacity" id="max_capacity"
+           placeholder="Kapasistet for deltakere"
+           value="{{ request.form['max_capacity'] }}">
+    <label for="description">Beskrivelse</label>
+    <input type="text" name="description" id="description"
+           placeholder="Beskrivelse"
+           value="{{ request.form['description'] }}">
+    <label for="location">Lokasjon</label>
+    <input type="text" name="location" id="location"
+           placeholder="Lokasjon"
+           value="{{ request.form['location'] }}">
+    <label for="date">Dato</label>
+    <input type="text" name="date" id="date"
+           placeholder="Dato"
+           value="{{ request.form['date'] }}">
+    <label for="price">Pris per person</label>
+    <input type="text" name="price" id="price"
+           placeholder="Pris per person"
+           value="{{ request.form['price'] }}">
+
+    <button type="submit">Registrer tur</button>
+
+
+</form>
+
+
+{% for mesg in get_flashed_messages() %}
+<h1>{{ mesg }}</h1>
+{% endfor %}
+{% endblock %}

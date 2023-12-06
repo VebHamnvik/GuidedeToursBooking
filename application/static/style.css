@@ -1,0 +1,167 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-image: url("https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto;
+    background-color: burlywood;
+}
+
+p, a, td, label {
+    font-size: 0.7rem;
+}
+
+h1, h2 {
+    padding-bottom: 1.5rem;
+}
+
+#add-distance {
+    padding-top: 1rem;
+}
+
+h1, h2, th {
+    color: rgba(0, 93, 99);
+    text-align: left;
+}
+
+a {
+    color: darkorange;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-right: 50px;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+form a {
+    vertical-align: top;
+    display: flex;
+}
+
+#gridContainer {
+    display: grid;
+    grid-template-areas: "header"
+                            "main"
+                            "footer";
+    grid-template-rows: auto auto auto;
+}
+
+header {
+    grid-area: header;
+    text-align: right;
+    background-color: #f3f3f3;
+    padding: 2rem 2rem;
+    max-height: 6rem;
+}
+
+main {
+    grid-area: main;
+    margin: 1rem auto;
+    padding: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    gap: 2rem;
+    flex-direction: column;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(8px);
+    border-radius: 1rem;
+    min-width: 60%;
+    max-width: 90%;
+}
+
+.content, .content-index {
+    background-color: rgba(243, 243, 243, 0.4);
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+
+/*INPUT & FORM*/
+input {
+    border-radius: 0.5rem;
+    padding: 10px 15px;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+input, button {
+    width: fit-content;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+label {
+    padding-top: 1rem;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: white;
+    color: #4CAF50;
+}
+
+#fakebtn {
+    background-color: red;
+}
+
+form, section {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    grid-area: footer;
+    background-color: #f3f3f3;
+    text-align: center;
+    padding: 2rem 2rem;
+}
+
+/* Tables */
+table {
+}
+
+td, th {
+    padding: 0.3rem;
+    background-color: rgba(243, 243, 243, 0.4);
+}
+
+tr {
+    margin: 1rem;
+}
+
+.table-description {
+    min-width: 30%;
+}
+
+td img {
+    width: 100px; /* Set the desired width */
+    height: auto; /* Maintain the aspect ratio */
+    display: block; /* Remove any default inline spacing */
+    margin: 0 auto; /* Center the image horizontally */
+}
+
+/* Message Styles */
+.message {
+    padding: 10px;
+    margin: 5px;
+    background-color: #f3f3f3;
+    color: red;
+}

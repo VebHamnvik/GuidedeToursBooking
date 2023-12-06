@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}Hjemmeside</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <!--https://stackoverflow.com/questions/51045291/how-to-use-flask-url-for-in-a-css-file -->
+</head>
+<body>
+<div id="gridContainer">
+    <header>
+        <nav id="top-meny">
+            <a href="/dashboard">Hjem</a>
+            <a href="/my_tours">Mine annonser</a>
+            <a href="/my_bookings">Mine bookinger</a>
+            <a href="/my_profile">Min profil</a>
+            <a href="/logout">Logg ut</a>
+            {% block nav %} {% endblock %}
+        </nav>
+    </header>
+    <main>
+        <div class="content">
+            {% block content %}
+            <h1>Guidede turer</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>Tittel</th>
+                    <th class="table-description">Beskrivelse</th>
+                    <th>Lokasjon</th>
+                    <th>Dato</th>
+                    <th>Pris per. pers</th>
+                    <th>Plasser ledig</th>
+                    <th>Guide</th>
+                </thead>
+                <tbody>
+                {% for tour in list_of_tours %}
+                {% if not tour.is_active == 0 %}
+                <tr>
+                    <td>
+                        <a href="{{ url_for('tour.intour', tour_id=tour.id) }}">{{
+                            tour.title }}</a>
+                    </td>
+                    <td class="table-description">{{ tour.description }}</td>
+                    <td>{{ tour.location }}</td>
+                    <td>{{ tour.date }}</td>
+                    <td>{{ tour.price }}</td>
+                    <td>{{ tour.spots_available }}</td>
+                    <td>{{ tour.created_by }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                </tbody>
+                <!-- Har ikke tilbakevirkende kraft, dvs. dersom det allerede eksisterer oppretted annonser, vil ikke pris og lokasjon vises for de-->
+                <!-- https://www.geeksforgeeks.org/flask-url-helper-function-flask-url_for/ -->
+            </table>
+            {% endblock %}
+        </div>
+    </main>
+    {% block footer %}
+    <footer>
+        <nav id="footer">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Twitter/X</a>
+        </nav>
+    </footer>
+    {% endblock %}
+</div>
+</body>
+
+</html>

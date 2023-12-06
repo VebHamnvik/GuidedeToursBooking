@@ -1,0 +1,56 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+<h1>Dine annonser</h1>
+
+<form action="/create_tour" method="GET"> <!-- Endre action til URL for å opprette turen -->
+    <button type="submit" class="button">Lag en annonse</button>
+</form>
+<h2>Her er en liste over dine annonser:</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Tittel</th>
+        <th class="table-description">Beskrivelse</th>
+        <th>Lokasjon</th>
+        <th>Dato</th>
+        <th>Pris per pers</th>
+        <th>Ledige plasser</th>
+        <th>Booket av</th>
+        <th>Slette tur?</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for tour in list_of_created_tours %}
+    <tr>
+        <td>
+            <a href="/loggedtour/{{ tour.id }}">{{ tour.title }}</a>
+        </td>
+        <td class="table-description">{{ tour.description }}</td>
+        <td>{{ tour.location }}</td>
+        <td>{{ tour.date }}</td>
+        <td>{{ tour.price }}</td>
+        <td>{{ tour.spots_available }}</td>
+        <td>
+            <!-- Her fikk jeg litt hjelp av chatGPT til å finne ut av syntaxen -->
+            {% for booked in tour.booked_by %}
+            {{ booked }}
+            {% if not loop.last %}
+            {% endif %}
+            {% endfor %}
+        </td>
+        <td><img
+                src="https://images.unsplash.com/photo-1700403322387-08013097df29?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Description of the image"></td>
+        <td>
+            <form method="POST" action="/cancel_tour">
+                <input type="hidden" name="id_tour" value="{{ tour.id }}">
+                <button type="submit" class="button" name="cancel_tour">Kansellér tur</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

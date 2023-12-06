@@ -1,0 +1,22 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+<h1>{{ correct_tour.title }}</h1>
+<p><b>Laget av: </b><p>{{ correct_tour.created_by}}</p>
+
+<h3>Beskrivelse av tour:</h3>
+<p>{{ correct_tour.description }}</p>
+
+<h3>Lokasjon:</h3>
+<p>{{ correct_tour.location }}</p>
+
+<h3>Dato:</h3>
+<p>{{ correct_tour.date }}</p>
+
+<h3>Pris:</h3>
+<p>{{ correct_tour.price }}</p>
+
+<td><a href="{{ url_for('booking.book_this_tour', book_tour_id=correct_tour.id) }}">Book this tour</a></td>
+
+
+{% endblock %}

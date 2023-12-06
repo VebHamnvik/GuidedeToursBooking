@@ -1,0 +1,45 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+<h1>Dine annonser!</h1>
+
+<form action="/mark_inactive" method="POST">
+    <button type="submit" class="button">Lag en annonse</button>
+</form>
+<h2>Her er en liste over dine annonser:</h2>
+<form action="/delete" method="POST">
+    <table>
+        <thead>
+        <tr>
+            <th>Velg</th>
+            <th>Tittel</th>
+            <th class="table-description">Beskrivelse |</th>
+            <th>Lokasjon</th>
+            <th>Dato</th>
+            <th>Pris per pers</th>
+            <th>Plasser ledig</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tour in list_of_created_tours %}
+        <tr>
+            <td>
+                <input type="checkbox" name="selected_tours" value="{{ tour.id }}">
+            </td>
+            <td>
+                <a href="{{ url_for('tour.tours', tour_id=tour.id) }}">{{ tour.title }}</a>
+            </td>
+            <td class="table-description">{{ tour.description }}</td>
+            <td>{{ tour.location }}</td>
+            <td>{{ tour.date }}</td>
+            <td>{{ tour.price }}</td>
+            <td>{{ tour.max_capacity }}</td>
+            <!--Legge inn at det viser -->
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <input type="submit" value="Slett valgte turer">
+</form>
+{% endblock %}

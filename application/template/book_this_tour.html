@@ -1,0 +1,20 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+<h3>Her må vi hente ut info om touren</h3>
+<form method="post">
+    <label for="participants">Hvor mange er dere?</label>
+    <br>
+    <input type="number" name="participants" id="participants"
+           placeholder="Antall"
+           value="{{ request.form['participants'] }}">
+    <br>
+    <button type="submit">Book denne touren</button>
+</form>
+<br>
+{% for mesg in get_flashed_messages() %}
+<h1>{{ mesg }}</h1>
+{% endfor %}
+
+
+{% endblock %}

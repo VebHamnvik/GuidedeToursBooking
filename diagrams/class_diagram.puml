@@ -1,0 +1,212 @@
+@startuml
+title SEnT-prosjekt: TurGlede
+left to right direction
+
+/'
+class TestClass {
+    - private
+    # protected
+    ~ private
+    + public
+    **obligatorisk** /'Vet ikke om det er konvensjonelt
+    __init__(self, foo)
+}
+'/
+
+package backend {
+    package Ads <<Rectangle>>{
+        class Advertisement {
+            + id: int
+
+            + title: string
+            + date
+            + price: double
+            + max_participants: int
+            + category: TourCategory /'type = Python codeword, so cannot be used'/
+            + created_by: int
+
+            + description: string
+            + difficulty
+            + location: string
+            + picture
+            + current_participants: int
+            + is_animal_friendly: bool
+            + is_accessible: bool
+            + accepted_payment_methods
+
+            - is_fully_booked: bool
+            - is_visible: bool
+
+            **__init__(self, title, date, price, max_participants, category, created_by)**
+
+            check_availability(self, max_participants, is_fully_booked)
+            set_visibility(self, is_visible)
+
+        }
+
+        enum TourCategory {
+            MOUNTAIN
+            CULTURAL
+            BEACH
+        }
+
+        enum TourDifficulty {
+            BEGINNER
+            INTERMEDIATE
+            ADVANCED
+        }
+
+    }
+
+    package Users <<Rectangle>>{
+        class User {
+            + id: int
+            + username: string
+            - password __encrypted__
+            - email
+            + picture
+            + bio
+            - date_of_birth
+            + gender
+
+            + is_seller: bool
+            + location
+            - payment_info: Card
+
+            + list_of_favorites: Advertisement[]
+            + list_of_reviews
+            --
+            **__init__(self, username, password)**
+            --**User info**--
+                add_info(self, bio, date_of_birth, gender, picture = None)
+                change_user_info(self, username, email, bio, picture, date_of_birth, gender)
+                add_form_of_payment(self, payment_info)
+            --**Ads**--
+                create_ad(self, Advertisement)
+                edit_ad(self, Advertisement)
+                delete_ad(self, Advertisement)
+                add_to_favorites(self, Advertisement)
+                remove_from_favorites(self, Advertisement)
+                empty_favorites()
+            --**Bookings and reviews**--
+                book_ad(self, advertisement_id, number_of_participants, booking_id) /'Number of participants blir manuelt registrert'/
+                see_booking_overview(self, Booking) /'including history'/
+                create_review(self, Booking, Review)
+        }
+
+        class Admin extends User {
+            + is_admin: bool
+            **__init__(self, is_admin)**
+            moderate_users()
+            delete_everything()
+            change_everything()
+        }
+
+        object list_of_favorites{
+            advertisement_id
+        }
+
+        object list_of_all_users{
+            - user_id
+            - username
+            - password
+        }
+
+        note right of list_of_all_users
+            We need to be able to check
+            that usernames are unique
+        end note
+    }
+
+    package Bookings <<Rectangle>> {
+
+        class Booking {
+            - booking_id
+            - user_id
+            - advertisement_id
+            - joining_participants: int /'Set to default value 1'/
+            - is_paid: bool
+            - booking_status: BookingStatus
+            - review_status: bool
+            --
+            ** __init__(self, booking_id, user_id, advertisement_id, joining_participants=1) **
+            --**Banking details**--
+                check_bank_details(...)
+            --**Send status to user and ad**--
+                confirm_booking(self, user_id, BookingStatus = RESERVED, is_paid = True)
+                cancel_booking(self, user_id, BookingStatus = CANCELED)
+                complete_booking(self, user_id, BookingStatus = FINISHED)
+                update_participants(self, advertisement_id, joining_participants)
+        }
+
+        object list_of_bookings{
+            - booking_id
+            - user_id
+            - advertisement_id
+            - is_paid: bool
+            - number_of_participants
+            - booking_status
+        }
+
+        enum BookingStatus {
+            RESERVED
+            CANCELED
+            FINISHED
+        }
+
+        class Review {
+            booking_id: int
+            is_the_seller: bool
+            user_id: int
+            rating: int/ENUM
+            comment: string
+
+            **__init__(self, booking_id)**
+            request_review()
+            add_review_to_profile()
+        }
+
+    }
+
+    package Payment <<Rectangle>>{
+        class Bank{
+            has_money: bool
+            authentication...
+            authorize()
+            transfer()
+            receive()
+        }
+
+        class Card {
+            card_type: CardType
+            user_id: int
+            card_number: int
+            ccv_number: int
+            **__init__(self, user_id, card_type, card_number, ccv_number)**
+        }
+
+        enum CardType{
+            VISA
+            MASTERCARD
+        }
+    }
+
+
+    'Connections, outdated'
+    /'
+    Advertisement::category -[#green]-> TourCategory
+    Advertisement::difficulty -[#green]-> TourDifficulty
+    Advertisement::created_by -[#green]-> User::id
+    Advertisement::id <-[#green]-- Booking::advertisement_id
+
+    User::id <-[#green]- Booking::user_id
+    User::add_form_of_payment-[#green]--> Card
+    User::list_of_favorites --[#green]-> list_of_favorites
+
+    list_of_all_users -[#blue]-o User
+    list_of_favorites::advertisement_id -[#blue]-o Advertisement::id
+
+    Booking::booking_status --> BookingStatus
+    '/
+}
+@enduml

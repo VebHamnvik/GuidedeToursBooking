@@ -1,0 +1,33 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+<h3>Endre profilen din:</h3>
+<p>OBS: Alle felt du ikke vil endre <u>MÅ VÆRE BLANKE</u></p>
+<form method="post">
+    <label for="username">Brukernavn</label>
+    <input type="text" name="username" id="username"
+           placeholder="Brukernavn"
+           value="{{ request.form['username'] }}">
+    <label for="email">Email</label>
+    <input type="text" name="email" id="email"
+           placeholder="Email"
+           value="{{ request.form['email'] }}">
+    <label for="description">Beskrivelse</label>
+    <input type="text" name="description" id="description"
+           placeholder="Beskrivelse"
+           value="{{ request.form['description'] }}">
+    <label for="birthdate">Fødselsdato</label>
+    <input type="text" name="birthdate" id="birthdate"
+           placeholder="Fødselsdato"
+           value="{{ request.form['birthdate'] }}">
+    <label for="gender">Kjønn</label>
+    <input type="text" name="gender" id="gender"
+           placeholder="Kjønn"
+           value="{{ request.form['gender'] }}">
+    <button type="submit">Registrer</button>
+</form>
+{% for mesg in get_flashed_messages() %}
+<h1>{{ mesg }}</h1>
+{% endfor %}
+
+{% endblock %}

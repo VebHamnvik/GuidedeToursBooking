@@ -1,0 +1,11 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+<h2>Velg betalingsmetode</h2>
+<h3>Vipps - Paypal - VISA</h3>
+<form method="POST" action="/my_bookings">
+    <button type="submit" id="fakebtn" name="payment_complete">Betal for tur</button>
+    <p>(Betaling er ikke implementert)</p>
+</form>
+
+{% endblock %}

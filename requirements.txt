@@ -1,0 +1,8 @@
+flask==2.3.3
+pytest~=7.4.2
+plantUML
+werkzeug==2.3.7
+Flask-Login==0.6.2
+black
+bs4
+coverage==7.3.2

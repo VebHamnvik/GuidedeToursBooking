@@ -1,0 +1,18 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+    <h1>Hei, {{ username }} </h1>
+    <h3>Brukernavn:</h3>
+    <p>{{ username }}</p>
+    <h3>Epost:</h3>
+    <p>{{ email }}</p>
+    <h3>Beskrivelse:</h3>
+    <p>{% if description %}{{ description }}{% endif %}</p>
+    <h3>Fødselsdato:</h3>
+    <p>{% if birthdate %}{{ birthdate }}{% endif %}</p>
+    <h3>Kjønn:</h3>
+    <p>{% if gender %}{{ gender }}{% endif %}</p>
+
+    <a href="change_profile">Legg til informasjon eller rediger profil</a>
+    <a href="change_password">Endre passord</a>
+{% endblock %}

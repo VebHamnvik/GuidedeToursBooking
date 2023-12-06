@@ -1,0 +1,37 @@
+Flask:
+https://www.youtube.com/playlist?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH
+https://chat.openai.com/share/09c60ecc-3d0f-4ae1-821b-64f4cd567717
+https://chat.openai.com/share/730c4083-2c04-409f-be1e-fe2942b914b8
+https://chat.openai.com/share/730c4083-2c04-409f-be1e-fe2942b914b8
+https://chat.openai.com/share/2f2ab73a-8a08-41f5-b26b-140dee7fb198
+https://chat.openai.com/share/3b180af1-9416-4ed6-a70e-dafe6b325ec8
+https://www.geeksforgeeks.org/flask-tutorial/
+https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3
+
+# Hvordan lage en knapp som returnerer en verdi
+https://chat.openai.com/share/bc715371-e2b0-4d15-9bb9-ac4de4fcc923
+# Iterere gjennom lister med dictionaries og tupler & for-løkke med flask i html
+https://chat.openai.com/share/7b541ba9-4ba1-4706-b59b-28d0404df8de
+# Opprette "dynamiske" html-sider
+https://chat.openai.com/share/3b180af1-9416-4ed6-a70e-dafe6b325ec8
+https://chat.openai.com/share/eb9acdd1-5837-4dc6-ad02-0d2b4c90b1e5
+
+SQLite:
+https://youtu.be/byHcYRpMgI4?si=QIX0V-AnC0ebvL4V
+https://www.youtube.com/watch?v=c8yHTlrs9EA
+https://www.youtube.com/watch?v=Ohj-CqALrwk
+
+Litt godt og blandet:
+https://chat.openai.com/share/d30c5554-7d3e-4814-90f4-e7ac19f50bd5
+https://chat.openai.com/share/f4768cf2-60b0-4df5-b234-fd2703904917
+https://chat.openai.com/c/2d0dee25-dd33-440d-a810-7ff7f5e98052
+
+Testing:
+https://stackoverflow.com/questions/23146253/how-to-test-redirection-in-flask-with-python-unittest
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+https://medium.com/beyn-technology/advanced-techniques-for-api-testing-with-pytest-f85a4376ae0
+https://chat.openai.com/share/b2391485-fbb0-49c2-aa16-beee6a2d5f23
+https://chat.openai.com/share/433818ce-98c4-4a9e-898f-2ed8d463ee9f
+https://chat.openai.com/share/8650f61a-ea79-44ed-abb1-54cce9b85901
+https://chat.openai.com/share/2f554fad-425c-42c2-b897-e0cfe2dbb871
+https://chat.openai.com/share/f8e40350-51e4-4468-9c9c-4c58545be681

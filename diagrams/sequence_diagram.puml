@@ -1,0 +1,111 @@
+@startuml
+'https://plantuml.com/sequence-diagram'
+
+skinparam maxMessageSize 200
+autonumber 1
+header Gruppe 22
+
+title TurGlede
+
+actor Bruker as br #lightyellow
+actor Guide as gu #lightblue
+boundary Frontend as fe #orange
+entity API as api #yellow
+database Backend as be #purple
+entity Tour as to #lightgreen
+
+gu --> gu : Tilbyr tjeneste om guidede turer
+
+== Opprette konto ==
+gu -> fe : Registrere bruker
+fe -> api : Lagre brukerinformasjon
+api -> be : Sjekke brukerinformasjon
+be -> api : Godkjent brukerinformasjon
+be -> be : Lagring av brukerinformasjon
+activate gu #lightblue
+api -> fe : Bekreftelse om registrering
+fe --> gu : Bekreftelse om registrering
+gu -> fe : Legge ut tur
+fe -> api : Lagre tourinformasjon
+api -> be : Sende tourinformasjon inn i db
+be -> be : Hente ut tourinformasjon fra db
+activate to #lightgreen
+
+be -> api : Sende lagret tourinformasjon
+api -> fe : Sende lagret tourinformasjon
+fe -> gu : Vise laget tour
+
+
+deactivate gu
+
+'autonumber inc A
+br --> br : Ønsker å gjøre noe spennende
+'Se gjennom turer, filtrere og booke
+'-- litt mer av den avanserte funksjonaliteten, filtrere, søke, evt kart. Redusere kapasitet.
+'Guide kan dobbeltsjekke ratings og bestemme om de vil '
+
+== Se gjennom turer ==
+br -> fe : Browse annonser
+fe -> api : Hente ut informasjon om tours
+api -> be : Hente ut informajson om tours
+be -> be : Lager liste eller henter ut informasjon om spesifikk tour
+be -> api : Sender riktig informasjon
+api -> fe : Sender riktig informasjon
+fe -> br : Viser tours/tour
+
+== Booke tur ==
+
+alt Ikke logget inn
+    br -> fe : Ikke logget inn
+    fe --> be : Er ikke innlogget bruker
+    be -> fe : Ikke tilgang til å booke
+    fe -> br : Kan ikke booke tur
+
+else Logget inn
+    be --> br : Er innlogget bruker
+    activate br #lightyellow
+    br -> fe : Velger antall påmeldte
+    fe -> api : Sender bookinginformasjon
+
+    alt Kapasitet til
+        api -> be : Sjekker bookinginformasjon
+        be -> be : Sjekke bookinginformasjon
+        be -> be : Lagrer eller oppdaterer booking
+        be -> api : Sende bookinginformasjon
+        api -> fe : Sende bookinginformasjon
+        fe -> br : Bekrefte booking
+
+        deactivate to
+    else For mange påmeldte
+        api -> be : Sende booking informasjon
+        be -> be : Sjekke bookinginformasjon
+        be -> be : Avvist booking
+        be -> api : Avvist booking
+        api -> fe : Avvist booking
+        fe -> br : Det er dessverre ikke plass til så mange på denne touren
+        br -> gu : Mail med forespørsel om ekstra plass
+        'venter en stund på svar'
+    deactivate br
+    == Endre booking ==
+    gu -> to : Oppdater kapasitet
+    activate to #lightgreen
+    activate gu #lightblue
+
+    deactivate gu
+
+    == Etter turen er gjennomført ==
+
+    autonumber inc A
+    br -> to : Gjennomføre tur
+    gu -> to : Gjennomføre tur
+    be -> br : Gi rangering til guide
+    deactivate to
+    end
+end
+
+
+' Verifisere, anmelde, tilbakemelding, kvalitetssikre, tur etter'
+'En person blir kasta ut av booking fordi han er dum'
+
+
+@endduml
